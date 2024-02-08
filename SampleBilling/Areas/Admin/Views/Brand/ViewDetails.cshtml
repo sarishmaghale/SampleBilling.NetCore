@@ -1,0 +1,66 @@
+﻿@inject CommonUtility util;
+@model ProductViewModel
+
+<p class="mb-3">
+    Last updated on @Model.UpdatedDate with @Model.ImportedStock stocks added
+</p>
+
+
+    <div class="form-group row">
+        <div class="col-3">
+              <label class="form-label">BrandId:</label>
+        </div>
+         <div class="col-6">
+               <input class="form-control" placeholder="@Model.BrandId" readonly/>
+         </div>
+    </div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">BrandName:</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@Model.BrandName" readonly />
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">Category:</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@await util.getCategoryName(Model.CategoryId??0)" readonly />
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">Price:</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@Model.Price" readonly />
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">Total Stocks(Left+Imported):</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@Model.TotalStocks" readonly />
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">Left Stock:</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@Model.LeftStock" readonly />
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-3">
+        <label class="form-label">Total Sales:</label>
+    </div>
+    <div class="col-6">
+        <input class="form-control" placeholder="@Model.TotalSales" readonly />
+    </div>
+</div>
+
+<a asp-action="Index" asp-controller="Brand" asp-area="Admin">Back To List</a>

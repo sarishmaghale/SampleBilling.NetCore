@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProductViewModel
+<form asp-action="Edit" method="Post">
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+
+    </div>
+    <div class="form-group row">
+        <label asp-for="BrandId" class="form-label">BrandId:</label>
+        <input asp-for="BrandId" class="form-control" placeholder="@Model.BrandId"  value="@Model.BrandId"/>
+    </div>
+    <div class="form-group row">
+        <label asp-for="BrandName" class="form-label">BrandName:</label>
+        <input asp-for="BrandName" class="form-control" placeholder="@Model.BrandName" value="@Model.BrandName" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Price" class="form-label">Price:</label>
+        <input asp-for="Price" class="form-control" placeholder="@Model.Price" value="@Model.Price" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="TotalStocks" class="form-label">TotalStocks:</label>
+        <input asp-for="TotalStocks" class="form-control" placeholder="@Model.TotalStocks" value="@Model.TotalStocks" readonly/>
+    </div>
+    <div class="form-group row">
+        <label class="form-label">Add Stock:</label>
+        <input asp-for="ImportedStock" type="number" class="form-control" min="1" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="UpdatedDate" class="form-label">UpdatedDate:</label>
+        <input asp-for="UpdatedDate" class="form-control" placeholder="@Model.UpdatedDate" value="@Model.UpdatedDate" readonly />
+    </div>
+    <div class="row">
+        <input type="submit" class="btn btn-success" value="Save" />
+    </div>
+</form>

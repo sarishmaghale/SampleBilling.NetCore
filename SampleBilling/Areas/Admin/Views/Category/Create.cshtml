@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CategoryViewModel
+<h4>Add new Category</h4>
+<form asp-action="Create" asp-controller="Category" asp-area="Admin">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row mt-5">
+        <div class="form-group">
+                <label asp-for="CategoryName" class="mb-2"></label>
+                <input asp-for="CategoryName" class="form-control" required />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+        </div>       
+    </div>
+    <div class="form-group mt-3 p-3">
+        <input type="submit" value="Create" class="btn btn-secondary" />
+    </div>
+</form>
+<a asp-action="Index" asp-controller="Category" asp-area="Admin">Back TO List</a>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ProductViewModel>
+@{
+    ViewData["Title"] = "Brands";
+    if (TempData["Msg"] != null)
+    {
+        <script> alert("@TempData["Msg"]")</script>
+    }
+}
+
+<p>
+    <a asp-action="Create" asp-controller="Brand" asp-area="Admin">Create </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=> model.BrandName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=> model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=> model.LeftStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeftStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    <a asp-action="ViewDetails" asp-route-id="@item.BrandId">View Details </a>|
+                    <a asp-action="Edit" asp-route-id="@item.BrandId">Edit </a>|
+                    <a asp-action="Delete" asp-route-id="@item.BrandId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

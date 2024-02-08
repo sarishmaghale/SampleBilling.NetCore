@@ -1,0 +1,70 @@
+﻿@model ProductViewModel
+@inject CommonUtility util
+@{
+    ViewData["Title"] = "Create";
+    var data = await util.getCategories();
+
+}
+
+
+<form asp-action="Create" asp-controller="Brand" asp-area="Admin">
+    <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+    <div class="row mt-5">
+        <div class="col-2">
+            <label asp-for="CategoryId" class="form-label"></label>
+        </div>
+        <div class="col-6">
+            <select asp-for="CategoryId" asp-items="@util.getCategoryId(data)" class="form-control" required>
+                <option disabled selected>Select Category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+        <div class="row mt-3">
+            <div class="col-2">
+                <label asp-for="BrandName" class="form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="BrandName" class="form-control" />
+            <span asp-validation-for="BrandName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-2">
+                <label asp-for="Price" class="form-label"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Price" class="form-control" min="0" required />
+            <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+    <div class="row mt-3">
+        <div class="col-2">
+            <label asp-for="TotalStocks" class="form-label"></label>
+        </div>
+        <div class="col-6">
+            <input asp-for="TotalStocks" class="form-control" min="1" required />
+            <span asp-validation-for="TotalStocks" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-2">
+            <label asp-for="UpdatedDate" class="form-label"></label>
+        </div>
+        <div class="col-6">
+            <input asp-for="UpdatedDate" class="form-control" value="@util.TodayDate()" placeholder="@util.TodayDate()" />
+            <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+        </div>
+    </div>
+       
+        <div class="col-3 mt-3 p-3">
+            <input type="submit" value="submit" class="btn btn-primary" />
+        </div>
+ 
+</form>
+<a asp-action="Index" asp-controller="Brand" asp-area="Admin">Back To List</a>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

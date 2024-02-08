@@ -1,0 +1,38 @@
+﻿@inject CommonUtility util
+@{
+    var data = await util.getCategories();
+}
+@model BillingViewModel
+@using (Html.BeginCollectionItem("Details"))
+{
+
+        <tr>
+           <td>
+            <button onclick="RemoveView(this)"><i class="fa fa-trash"></i></button>
+           </td>
+            <td>
+            <select asp-for="CategoryId" asp-items="@util.getCategoryId(data)" class="form-control"
+                        onchange="CategoryChange(this)">
+                    <option disabled selected>Select Category</option>
+                </select>
+            </td>
+            <td>
+                <select asp-for="BrandId" class="form-control Brands" onchange="BrandChange(this)">
+                    <option disabled selected>Select Brands</option>
+                </select>
+            </td>
+        <td>
+
+            <input asp-for="Quantity" type="number" min="1" class="form-control" placeholder="1" value="1" />
+        </td>
+            <td>
+                <input asp-for="Price" class="border-0 Price" readonly="readonly" />
+            </td>
+        </tr>
+
+}
+<script type="text/javascript">
+    function RemoveView(e){
+        $(e).closest("tr").remove();
+    }
+    </script>

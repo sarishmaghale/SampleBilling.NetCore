@@ -1,0 +1,116 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    if (TempData["Msg"] != null)
+    {
+        <script> alert("@TempData["Msg"]")</script>
+    }
+}
+@model BillingViewModel
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+crossorigin="anonymous"></script>
+
+    
+
+<form asp-action="AddBilling" asp-controller="Billing" asp-area="Admin">
+    <div class="MainBody mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <input asp-for="Name" class="form-control" placeholder="Enter Name" />
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="Done" />
+    </div>
+    <table class="table mt-3 ">
+        <thead>
+            <tr>               
+                <th >
+                    <input type="number" id="NoOfItems" min="0" style="width:15mm"/>
+                    <i class="fa fa-plus" id="AddMore"></i>
+                </th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody class="BillingBody">
+
+        </tbody>
+    </table>
+    <div class="">
+    </div>
+
+</form>
+
+<!--Add Partial Views-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#AddMore").click(function () {
+            var items = $("#NoOfItems").val();
+            if(!items){
+                items = 1;
+            }
+            while(items!=0){
+                $.ajax({
+                    url: "@Url.Action("GetViews", "Billing")",
+                    method: "Get",
+                    success: function (result) {
+                        $(".BillingBody").append("<tr>" + result + "</tr>");
+                        $("#NoOfItems").val(" ");
+                    },
+                    error: function () {
+                        alert('failed');
+                    }
+                });
+                items = items - 1;
+            }              
+        });
+    })    
+ </script>
+
+ <!--Multiple Cascading-->
+
+ <!--On category change, populate brands-->
+ <script type="text/javascript">
+    function CategoryChange(e) {
+        var CatId = $(e).val();
+        var Brands = $(e).closest("tr").find(".Brands");
+        $.ajax({
+            url:"@Url.Action("GetBrandValue","Billing")",
+            method:"Get",
+            data: { CategoryId: CatId },
+            success: function(result){
+                Brands.empty();
+                Brands.append("<option disabled selected>Select Brands</option>");
+                $.each(result, function (index, row) {
+                    Brands.append("<option value='" + row.brandId + "'>" + row.brandName + "</option>");
+                });
+            },
+            error:function(){
+                alert('failed');
+            },
+        });
+    }
+</script>
+
+<!--On Brand Change, populate Price Input-->
+<script type="text/javascript">
+    function BrandChange(e){
+        var BrandId = $(e).val();
+        var PriceVal = $(e).closest("tr").find(".Price");
+        $.ajax({
+            url: "@Url.Action("GetPriceValue", "Billing")",
+            method: "Get",
+            data: { BrandId: BrandId },
+            success: function (result) {
+                PriceVal.empty();
+                PriceVal.val(result);
+            },
+            error: function () {
+                alert('failed');
+            },
+        });
+    }
+</script>
