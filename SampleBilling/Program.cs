@@ -28,6 +28,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddTransient<IBillingRepo, BillingRepo>();
 builder.Services.AddTransient<IBrandRepo, BrandRepository>();
 builder.Services.AddTransient<ICategoryRepo, CategoryRepository>();
+builder.Services.AddTransient<IReportRepository, ReportsRepository>();
 builder.Services.AddTransient<CommonUtility>();
 var app = builder.Build();
 

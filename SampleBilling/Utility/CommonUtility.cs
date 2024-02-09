@@ -81,7 +81,7 @@ namespace SampleBilling.Utility
           var data=  await ent.Brands.Select(m => new ProductViewModel()
             {
               BrandName=m.BrandName,
-              TotalSales=ent.Sales.Where(x=> x.ProductId==m.BrandId).Select(x=> x.TotalSales).FirstOrDefault(),
+              TotalSales=ent.SalesAndStocks.Where(x=> x.BrandId==m.BrandId).Select(x=> x.TotalSales).FirstOrDefault(),
               Price=m.Price,
             }).OrderByDescending(m => m.TotalSales).Take(3).ToListAsync();
             return data;

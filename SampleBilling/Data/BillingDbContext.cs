@@ -19,9 +19,9 @@ namespace SampleBilling.Data
         public virtual DbSet<BillingDetail> BillingDetails { get; set; } = null!;
         public virtual DbSet<Brand> Brands { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
-        public virtual DbSet<Sale> Sales { get; set; } = null!;
         public virtual DbSet<DailyReport> DailyReports { get; set; } = null!;
 
+        public virtual DbSet<SalesAndStock> SalesAndStocks { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -82,20 +82,6 @@ namespace SampleBilling.Data
             });
 
 
-            modelBuilder.Entity<Sale>(entity =>
-            {              
-
-                entity.ToTable("Sale");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany()
-                    .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Sale__ProductId__693CA210");
-            });
             base.OnModelCreating(modelBuilder);
 
             OnModelCreatingPartial(modelBuilder);

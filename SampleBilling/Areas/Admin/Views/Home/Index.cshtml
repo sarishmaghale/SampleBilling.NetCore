@@ -96,7 +96,8 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+
                 <div class="dropdown no-arrow">
                     <span class="dropdown-toggle" role="button" id="dropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -105,34 +106,14 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                          aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">Dropdown Header:</div>
-                        <button class="dropdown-item " id="updateRecords">Update Daily Records</button>
+                        <button class="dropdown-item ">Update Daily Records</button>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" >Update Daily Records</button>
                     </div>
                 </div>
             </div>
-            @section Scripts {
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("#updateRecords").click(function () {
-                            debugger;
-                            $.ajax({
-                                debugger;
-                                url: "@Url.Action("DailyReportUpdate", "DailyReportController")",
-                                method: "Post",
-                                success: function () {
-                                    alert("success")
-                                },
-                                error: function () {
-                                    alert('failed');
-                                },
-                            });
-                        })
-                    })
-                   \
-                </script>
-            }
+          
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area">
@@ -178,11 +159,11 @@
                             var results = await util.bestSellers();
                             foreach (var item in results)
                             {
-                                            <tr>
-                                            <td>@item.BrandName</td>
-                                            <td>@item.Price</td>
-                                            <td>@item.TotalSales</td>
-                                            </tr>
+                                <tr>
+                                   <td>@item.BrandName</td>
+                                   <td>@item.Price</td>
+                                   <td>@item.TotalSales</td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -193,7 +174,6 @@
             </div>
         </div>
     </div>
-
 
 
 

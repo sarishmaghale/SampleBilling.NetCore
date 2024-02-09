@@ -100,6 +100,7 @@
                 </a>
             </li>
 
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -254,6 +255,25 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function updateRecords() {
+            debugger;
+            $("#updateRecords").click(function () {
+                debugger;
+                $.ajax({
+                    debugger;
+                    url: "@Url.Action("DailyReportUpdate", "DailyReportController")",
+                    method: "Post",
+                    success: function () {
+                        alert("success")
+                    },
+                    error: function () {
+                        alert('failed');
+                    },
+                });
+            }
+            </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="~/Themes/vendor/jquery/jquery.min.js"></script>

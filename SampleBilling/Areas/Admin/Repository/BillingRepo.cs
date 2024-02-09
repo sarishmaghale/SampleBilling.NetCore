@@ -54,13 +54,17 @@ namespace SampleBilling.Areas.Admin.Repository
                             };
                             await db.BillingDetails.AddAsync(data2);
                             await db.SaveChangesAsync();
-
-                            var EditSales = await db.Sales.Where(x => x.ProductId == data2.BrandId).FirstOrDefaultAsync();
-                            EditSales.TotalSales = EditSales.TotalSales + data2.Quantity;
-                            EditSales.LeftStocks = EditSales.LeftStocks - data2.Quantity;
+                            int BrdId = DetailData.BrandId;
+                            var EditSales = db.SalesAndStocks.Where(x => x.BrandId == BrdId).FirstOrDefault();
+                            if (EditSales != null)
+                            {
+                                EditSales.TotalSales += data2.Quantity;
+                                EditSales.LeftStocks -= data2.Quantity;
+                            }
                             db.Entry(EditSales).State = EntityState.Modified;
                             await db.SaveChangesAsync();
-                        }                                                               
+
+                        }
                     }                   
                    
                     transaction.Commit();

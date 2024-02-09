@@ -29,15 +29,15 @@ namespace SampleBilling.Areas.Admin.Repository
                     };
                     await db.Brands.AddAsync(brandData);
                     await db.SaveChangesAsync();
-                    Sale sales = new Sale()
+                    SalesAndStock sales = new SalesAndStock()
                     {
-                        ProductId = brandData.BrandId,
+                        BrandId = brandData.BrandId,
                         TotalSales = 0,
                         UpdatedDate=brandData.UpdatedDate,
                         LeftStocks=brandData.TotalStocks,
                         ImportedStock=brandData.TotalStocks,
                     };
-                    await db.Sales.AddAsync(sales);
+                    await db.SalesAndStocks.AddAsync(sales);
                     await db.SaveChangesAsync();
                     transaction.Commit();
                     return true;
@@ -60,7 +60,7 @@ namespace SampleBilling.Areas.Admin.Repository
                 CategoryId = x.CategoryId,
                 BrandName = x.BrandName,
                 TotalStocks=x.TotalStocks,
-                LeftStock=db.Sales.Where(a=> a.ProductId==x.BrandId).Select(a=>a.LeftStocks).FirstOrDefault()??0,
+                LeftStock=db.SalesAndStocks.Where(a=> a.BrandId==x.BrandId).Select(a=>a.LeftStocks).FirstOrDefault()??0,
                
                 UpdatedDate=x.UpdatedDate
             }).ToListAsync();
@@ -73,10 +73,10 @@ namespace SampleBilling.Areas.Admin.Repository
                 BrandName=m.BrandName,
                 Price=m.Price,
                 TotalStocks=m.TotalStocks,
-                LeftStock=db.Sales.Where(a=> a.ProductId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
+                LeftStock=db.SalesAndStocks.Where(a=> a.BrandId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
                 UpdatedDate=m.UpdatedDate,
                 CategoryId=m.CategoryId,
-                ImportedStock= db.Sales.Where(a => a.ProductId == id).Select(a => a.ImportedStock).FirstOrDefault() ?? 0
+                ImportedStock= db.SalesAndStocks.Where(a => a.BrandId == id).Select(a => a.ImportedStock).FirstOrDefault() ?? 0
             }).FirstOrDefaultAsync();
             return data;
         }
@@ -95,7 +95,7 @@ namespace SampleBilling.Areas.Admin.Repository
                     await db.SaveChangesAsync();
 
                     //update left stocks & date
-                    var OldStock = await db.Sales.Where(a => a.ProductId == model.BrandId).FirstOrDefaultAsync();
+                    var OldStock = await db.SalesAndStocks.Where(a => a.BrandId == model.BrandId).FirstOrDefaultAsync();
                     OldStock.ImportedStock = model.ImportedStock;
                     OldStock.UpdatedDate = DateTime.Now.ToShortDateString();
                     OldStock.LeftStocks += model.ImportedStock;
@@ -126,10 +126,10 @@ namespace SampleBilling.Areas.Admin.Repository
                 CategoryId=m.CategoryId,
                 Price=m.Price,
                 TotalStocks=m.TotalStocks,
-                ImportedStock=db.Sales.Where(y=> y.ProductId==id).Select(y=> y.ImportedStock).FirstOrDefault(),
-                LeftStock= db.Sales.Where(a=> a.ProductId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
+                ImportedStock=db.SalesAndStocks.Where(y=> y.BrandId==id).Select(y=> y.ImportedStock).FirstOrDefault(),
+                LeftStock= db.SalesAndStocks.Where(a=> a.BrandId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
                 UpdatedDate=m.UpdatedDate,
-                TotalSales= db.Sales.Where(b=> b.ProductId==id).Select(b=> b.TotalSales).FirstOrDefault(),
+                TotalSales= db.SalesAndStocks.Where(b=> b.BrandId==id).Select(b=> b.TotalSales).FirstOrDefault(),
             }).FirstOrDefaultAsync();
             return data;
         }

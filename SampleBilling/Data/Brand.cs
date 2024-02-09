@@ -21,6 +21,6 @@ namespace SampleBilling.Data
 
         public virtual Category? Category { get; set; }
         public virtual ICollection<BillingDetail> BillingDetails { get; set; }
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<SalesAndStock> SalesAndStocks { get; set; }
     }
 }

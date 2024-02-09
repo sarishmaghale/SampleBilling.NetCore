@@ -256,3 +256,4 @@ C:\Users\acer\Desktop\Project\SampleBilling\SampleBilling\obj\Debug\net6.0\refin
 C:\Users\acer\Desktop\Project\SampleBilling\SampleBilling\obj\Debug\net6.0\SampleBilling.pdb
 C:\Users\acer\Desktop\Project\SampleBilling\SampleBilling\obj\Debug\net6.0\SampleBilling.genruntimeconfig.cache
 C:\Users\acer\Desktop\Project\SampleBilling\SampleBilling\obj\Debug\net6.0\ref\SampleBilling.dll
+C:\Users\acer\Desktop\Project\SampleBilling\SampleBilling\obj\Debug\net6.0\SampleBilling.sourcelink.json
