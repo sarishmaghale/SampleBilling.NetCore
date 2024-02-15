@@ -59,7 +59,7 @@ namespace SampleBilling.Areas.Admin.Repository
                 Price = x.Price,
                 CategoryId = x.CategoryId,
                 BrandName = x.BrandName,
-                TotalStocks=x.TotalStocks,
+                TotalStocks=x.TotalStocks??0,
                 LeftStock=db.SalesAndStocks.Where(a=> a.BrandId==x.BrandId).Select(a=>a.LeftStocks).FirstOrDefault()??0,
                
                 UpdatedDate=x.UpdatedDate
@@ -72,7 +72,7 @@ namespace SampleBilling.Areas.Admin.Repository
                 BrandId=m.BrandId,
                 BrandName=m.BrandName,
                 Price=m.Price,
-                TotalStocks=m.TotalStocks,
+                TotalStocks=m.TotalStocks??0,
                 LeftStock=db.SalesAndStocks.Where(a=> a.BrandId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
                 UpdatedDate=m.UpdatedDate,
                 CategoryId=m.CategoryId,
@@ -125,7 +125,7 @@ namespace SampleBilling.Areas.Admin.Repository
                 BrandName=m.BrandName,
                 CategoryId=m.CategoryId,
                 Price=m.Price,
-                TotalStocks=m.TotalStocks,
+                TotalStocks=m.TotalStocks??0,
                 ImportedStock=db.SalesAndStocks.Where(y=> y.BrandId==id).Select(y=> y.ImportedStock).FirstOrDefault(),
                 LeftStock= db.SalesAndStocks.Where(a=> a.BrandId==id).Select(a=> a.LeftStocks).FirstOrDefault()??0,
                 UpdatedDate=m.UpdatedDate,

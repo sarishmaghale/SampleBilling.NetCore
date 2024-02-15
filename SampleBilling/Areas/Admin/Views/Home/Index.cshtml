@@ -14,9 +14,12 @@
                     </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. @await util.getDailySales(TodayDate)</div>
                 </div>
-                <div class="col-auto">
-                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                </div>
+                <a asp-action="DailyEarnings" asp-controller="Home" asp-area="Admin">
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                </a>
+               
             </div>
         </div>
     </div>
@@ -115,11 +118,54 @@
             </div>
           
             <!-- Card Body -->
+
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                <div>
+                    <canvas id="myChart"></canvas>
                 </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $.ajax({
+                            type: "Post",
+                            url: "@Url.Action("GetSalesData","Home")",
+                            data: "",
+                            contentType: "application/json; charset-utf8",
+                            dataType: "json",
+                            success: OnSuccess,
+                        });
+                        function OnSuccess(data){
+                            const barChart = document.getElementById("myChart");
+                            var _data= data;
+                            var _labels=_data[0];
+                            var _CharData = _data[1];
+                            var colors = ["#86C5D8", "#86C5D8", "#86C5D8"];
+                            new Chart(barChart,
+                            {
+                                type: 'line',
+                                data: {
+                                    labels: _labels,
+                                    datasets: [{
+                                        //line graph
+                                            fill: false,
+                                            data: _CharData,
+                                            borderColor: 'rgb(75, 192, 192)',
+                                            tension: 0.1
+                                            //bar graph
+                                        // backgroundColor: colors,
+                                        // data: _CharData,
+                                        // borderWidth: 1,
+                                    }]
+                                }
+                            });
+                        }
+                    })
+                </script>
+
             </div>
+
         </div>
     </div>
 
@@ -160,9 +206,9 @@
                             foreach (var item in results)
                             {
                                 <tr>
-                                   <td>@item.BrandName</td>
-                                   <td>@item.Price</td>
-                                   <td>@item.TotalSales</td>
+                                     <td>@item.BrandName</td>
+                                     <td>@item.Price</td>
+                                     <td>@item.TotalSales</td>
                                 </tr>
                             }
                         }

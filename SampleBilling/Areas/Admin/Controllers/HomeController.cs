@@ -24,5 +24,15 @@ namespace SampleBilling.Areas.Admin.Controllers
             await content.AddDailyRecord(model);
             return View();
         }
+        public async Task<IActionResult> DailyEarnings()
+        {
+            return View(await util.getDailyReportList());
+        }
+        [HttpPost]
+        public List<object> GetSalesData()
+        {
+            var data = util.GetSalesData();
+            return data;
+        }
     }
 }

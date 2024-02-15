@@ -1,0 +1,27 @@
+﻿@* 
+@{
+}
+@model BillingViewModel
+<form asp-action="Delete" method="Post">
+    <div asp-validation-summary="ModelOnly" class="text-danger">
+    </div>
+    <div class="form-group row">
+        <label asp-for="BillId" class="form-label">BillId:</label>
+        <input asp-for="BillId" class="form-control" placeholder="@Model.BillId" value="@Model.BillId" readonly/>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Name" class="form-label">Name:</label>
+        <input asp-for="Name" class="form-control" placeholder="@Model.Name" value="@Model.Name" readonly />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Phone" class="form-label">Phone:</label>
+        <input asp-for="Phone" class="form-control" placeholder="@Model.Phone" value="@Model.Phone" readonly />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Total" class="form-label">Total Amount:</label>
+        <input asp-for="Total" class="form-control" placeholder="@Model.Total" value="@Model.Total" readonly />
+    </div>
+    <div class="row">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    </div>
+</form> *@

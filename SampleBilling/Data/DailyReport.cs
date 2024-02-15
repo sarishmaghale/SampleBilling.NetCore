@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SampleBilling.Data
 {
-    public class DailyReport
+    public partial class DailyReport
     {
-        [Key]
         public int Id { get; set; }
         public string? Date { get; set; }
         public int? Income { get; set; }
         public int? Expense { get; set; }
-
     }
 }

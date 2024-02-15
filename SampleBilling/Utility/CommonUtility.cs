@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SampleBilling.Data;
 using SampleBilling.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SampleBilling.Utility
 {
@@ -62,6 +63,17 @@ namespace SampleBilling.Utility
             }).ToListAsync();
             return data;
         }
+        public async Task<IEnumerable<ProductViewModel>> getBrandsList()
+        {
+            var data = await ent.Brands.Select(x => new ProductViewModel()
+            {
+                BrandId = x.BrandId,
+                Price = x.Price,
+                CategoryId = x.CategoryId,
+                BrandName = x.BrandName,
+            }).ToListAsync();
+            return data;
+        }
         public async Task<int> getDailySales(string Date)
         {
             var TotalSales = await ent.Billings.Where(x => x.BillingDate == Date).ToListAsync();
@@ -94,6 +106,26 @@ namespace SampleBilling.Utility
         public async Task<int> TotalCategories()
         {
             return await ent.Categories.CountAsync();
+        }
+        public async Task<IEnumerable<DailyReportViewModel>> getDailyReportList()
+        {
+            var data=await ent.DailyReports.Select(x => new DailyReportViewModel() { 
+                Id=x.Id,
+            Date= x.Date,
+            Income=x.Income,
+            Expense=x.Expense
+            }).OrderByDescending(x=> x.Id).ToListAsync();
+            return data;
+
+        }
+        public List<object> GetSalesData()
+        {
+            List<object> data = new List<object>();
+            List<string> labels =ent.DailyReports.Select(x => x.Date).ToList();
+            data.Add(labels);
+            List<int> SalesNumber = ent.DailyReports.Select(y => y.Income ?? 0).ToList();
+            data.Add(SalesNumber);
+            return data;
         }
     }
 }

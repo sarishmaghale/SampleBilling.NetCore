@@ -25,7 +25,10 @@ namespace SampleBilling.Areas.Admin.Repository
                 await db.DailyReports.AddAsync(records);
                 int a = await db.SaveChangesAsync();
             }
-           
+            var record =await db.DailyReports.Where(y=> y.Date==model.Date).FirstOrDefaultAsync();
+            record.Income = model.Income;
+            db.Entry(record).State = EntityState.Modified;
+            await db.SaveChangesAsync();          
             return true;
         }
     }

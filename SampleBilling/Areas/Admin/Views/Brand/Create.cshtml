@@ -25,7 +25,7 @@
                 <label asp-for="BrandName" class="form-label"></label>
             </div>
             <div class="col-6">
-                <input asp-for="BrandName" class="form-control" />
+            <input asp-for="BrandName" class="form-control" required />
             <span asp-validation-for="BrandName" class="text-danger"></span>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <label asp-for="UpdatedDate" class="form-label"></label>
         </div>
         <div class="col-6">
-            <input asp-for="UpdatedDate" class="form-control" value="@util.TodayDate()" placeholder="@util.TodayDate()" />
+            <input asp-for="UpdatedDate" class="form-control" value="@util.TodayDate()" placeholder="@util.TodayDate()" required/>
             <span asp-validation-for="UpdatedDate" class="text-danger"></span>
         </div>
     </div>

@@ -5,7 +5,7 @@
 }
 @model IEnumerable< BillingViewModel>
 
-<table class="table">
+<table class="table" id="myHistoryTable">
     <thead>
         <tr>
            <th>@Html.DisplayNameFor(model=> model.BillId)</th>
@@ -31,4 +31,20 @@
         }
     </tbody>
 </table>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<script>
+    var js = jQuery.noConflict(true);
+    js(document).ready(function () {
+        js('#myHistoryTable').DataTable({
+            "columnDefs": [
+                {
+                    targets: [1,2],
+                    orderable: false
+
+                }
+            ]
+        });
+    });
+</script>

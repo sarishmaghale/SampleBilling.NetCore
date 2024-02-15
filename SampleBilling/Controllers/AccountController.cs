@@ -50,7 +50,7 @@ namespace SampleBilling.Controllers
            var result= await signInManager.PasswordSignInAsync(model.UserName!, model.Password!, model.RememberMe, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home", new {area="Admin"});
+                return RedirectToAction("Index", "Billing", new {area="Admin"});
             }
             ModelState.AddModelError("", "Invalid LogIn attempt");
             return View(model);

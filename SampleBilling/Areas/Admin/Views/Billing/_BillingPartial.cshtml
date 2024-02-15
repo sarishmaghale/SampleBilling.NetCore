@@ -17,7 +17,7 @@
                 </select>
             </td>
             <td>
-                <select asp-for="BrandId" class="form-control Brands" onchange="BrandChange(this)">
+                <select asp-for="BrandId" asp-items="@util.getBrandId(await util.getBrandsList())" class="form-control Brands" onchange="BrandChange(this)">
                     <option disabled selected>Select Brands</option>
                 </select>
             </td>

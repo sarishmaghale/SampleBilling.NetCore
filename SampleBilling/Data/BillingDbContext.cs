@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace SampleBilling.Data
 {
@@ -20,6 +21,7 @@ namespace SampleBilling.Data
         public virtual DbSet<Brand> Brands { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<DailyReport> DailyReports { get; set; } = null!;
+        public virtual DbSet<Customer> Customers { get; set; }
 
         public virtual DbSet<SalesAndStock> SalesAndStocks { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

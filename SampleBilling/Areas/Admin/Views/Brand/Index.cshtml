@@ -3,7 +3,7 @@
     ViewData["Title"] = "Brands";
     if (TempData["Msg"] != null)
     {
-        <script> alert("@TempData["Msg"]")</script>
+            <script> alert("@TempData["Msg"]")</script>
     }
 }
 
@@ -11,7 +11,7 @@
     <a asp-action="Create" asp-controller="Brand" asp-area="Admin">Create </a>
 </p>
 
-<table class="table">
+<table class="table" id="BrandTableList">
     <thead>
         <tr>
             <th>
@@ -55,6 +55,24 @@
     </tbody>
     
 </table>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<script>
+    var js = jQuery.noConflict(true);
+    js(document).ready(function () {
+        js('#BrandTableList').DataTable({
+            "columnDefs": [
+                {
+                    targets: [0,2],
+                    orderable: false
+                    
+                }
+            ]
+        });
+    });
+</script>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

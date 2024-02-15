@@ -1,10 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     if (TempData["Msg"] != null)
     {
-        <script>alert("@TempData["Msg"]")</script>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               @TempData["Msg"]
+            </div>
     }
 }
 <style>
@@ -171,13 +172,13 @@ p li, ul li, ol li {
 @inject CommonUtility util
 @model BillingViewModel
 
-<table class="body-wrap">
+<table class="body-wrap" >
     <tbody>
         <tr>
             <td></td>
             <td class="container" width="600">
                 <div class="content">
-                    <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                    <table class="main" width="100%" cellpadding="0" cellspacing="0" >
                         <tbody>
                             <tr>
                                 <td class="content-wrap aligncenter">
@@ -202,10 +203,10 @@ p li, ul li, ol li {
                                                                             <tr>
                                                                                 <th>Products</th>
                                                                                 <th>Quantity</th>
-                                                                                <th>Price Per</th>
+                                                                                <th>Unit Price</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody>
+                                                                        <tbody class="mb-2">
                                                                             @foreach(var item in Model.Details)
                                                                             {
                                                                                 <tr>
@@ -214,11 +215,24 @@ p li, ul li, ol li {
                                                                                     <td class="">Rs. @item.Price</td>
                                                                                 </tr>
                                                                             }
-                                                                         <tr>
-                                                                             <th colspan="2">Total:</th>
-                                                                              <td>@Model.Total</td>
-                                                                          </tr>
+                                                                       
                                                                         </tbody>
+                                                                        <tr>
+                                                                            <th> </th>
+                                                                            <th >Total:</th>
+                                                                            <td> Rs. @Model.Total</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th> </th>
+                                                                            <th>Discount in %:</th>
+                                                                            <td>@Model.Discount </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th> </th>
+                                                                            <th> Payable Amount:</th>
+                                                                            <td>Rs.@Model.PayableAmt</td>
+                                                                          
+                                                                        </tr>
                                                                     </table>
                                                                 </td>
                                                             </tr>
@@ -228,7 +242,7 @@ p li, ul li, ol li {
                                             </tr>
                                             <tr>
                                                 <td class="content-block">
-                                                    <a href="#">Print</a>
+                                                    <button type="button" class="btn btn-link" onclick="window.print()">Print</button>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -252,3 +266,16 @@ p li, ul li, ol li {
 
 
 <a asp-action="History" asp-controller="Billing" asp-area="Admin">Back To List</a>
+@* <script type="text/javascript">
+    var $ = jQuery.noConflict(true);
+    function printDiv(divId) {
+        var printContents = document.getElementById(divId).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script> *@
